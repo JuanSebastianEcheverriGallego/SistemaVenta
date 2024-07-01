@@ -4,18 +4,38 @@
  */
 package Vista;
 
+import Modelo.LoginDAO;
+import Modelo.login;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    login lg = new login();
+    LoginDAO login = new LoginDAO();
+
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public void validar() {
+        String correo = txtCorreo.getText();
+        String pass = String.valueOf(txtPass.getPassword());
+        if (!"".equals(correo) || !"".equals(pass)) {
+            lg = login.log(correo, pass);
+            if (lg.getCorreo() != null && lg.getPass() != null) {
+                Sistema sis = new Sistema();
+                sis.setVisible(true);;
+                dispose();
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"Correo o Contraseña incorrecta");
+            }
+        }
     }
 
     /**
@@ -198,7 +218,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        validar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
