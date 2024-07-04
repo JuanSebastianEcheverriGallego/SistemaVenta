@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
             lg = login.log(correo, pass);
             if (lg.getCorreo() != null && lg.getPass() != null) {
                 Sistema sis = new Sistema();
-                sis.setVisible(true);;
+                sis.setVisible(true);
                 dispose();
             }else
             {
