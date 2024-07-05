@@ -2,12 +2,16 @@
 package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProveedorDAO {
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
+    ResultSet rs;
     
    public boolean RegistrarProveedor(Proveedor pr)
    {
@@ -35,4 +39,28 @@ public class ProveedorDAO {
        }
    }
     
+   public List ListarProveedor()
+   {
+       List<Proveedor> Listapr = new ArrayList();
+       String sql = "SELECT * FROM proveedor";
+       try {
+           con = cn.getConnection();
+           ps= con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {
+               Proveedor pr = new Proveedor();
+               pr.setId(rs.getInt("id"));
+               pr.setRuc(rs.getInt("ruc"));
+               pr.setNombre(rs.getString("nombre"));
+               pr.setTelefono(rs.getInt("telefono"));
+               pr.setDireccion(rs.getString("direccion"));
+               pr.setRazon(rs.getString("razon"));
+               Listapr.add(pr);
+           }
+           
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       return Listapr;
+   }
 }
