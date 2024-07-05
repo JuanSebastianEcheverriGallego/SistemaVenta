@@ -1049,7 +1049,7 @@ public class Sistema extends javax.swing.JFrame {
             cl.setDireccion(txtDireccionCliente.getText());
             cl.setRazon(txtRazonCliente.getText());
             cl.setId(Integer.parseInt(txtIdCliente.getText()));
-            if (!"".equals(txtDniCliente) || !"".equals(txtNombreCliente) || !"".equals(txtTelefonoCliente)) {
+            if (!"".equals(txtDniCliente) || !"".equals(txtNombreCliente) || !"".equals(txtTelefonoCliente) || !"".equals(txtDireccionCliente) || !"".equals(txtRazonCliente)) {
                 client.ModicarCliente(cl);
                 LimpiarTable();
                 LimpiarCliente();
