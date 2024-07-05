@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProveedorDAO {
     Connection con;
@@ -62,5 +64,28 @@ public class ProveedorDAO {
            System.out.println(e.toString());
        }
        return Listapr;
+   }
+   
+   public boolean EliminarProveedor(int id)
+   {
+       String sql = "DELETE FROM proveedor WHERE id = ?";
+       
+       try {
+           con = cn.getConnection();
+           ps = con.prepareStatement(sql);
+           ps.setInt(1, id);
+           ps.execute();
+           return true;
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+           return false;
+       }finally
+       {
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               System.out.println(ex.toString());
+           }
+       }
    }
 }
