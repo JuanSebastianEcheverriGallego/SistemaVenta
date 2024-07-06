@@ -1254,7 +1254,7 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnGuardarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProActionPerformed
         // TODO add your handling code here:
-        if (!"".equals(txtCodigoPro) || !"".equals(txtDesPro) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro) || !"".equals(txtPrecioPro)) {
+        if (!"".equals(txtCodigoPro.getText()) || !"".equals(txtDesPro.getText()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText()) || !"".equals(txtPrecioPro.getText())) {
             pro.setCodigo(txtCodigoPro.getText());
             pro.setNombre(txtDesPro.getText());
             pro.setProveedor(cbxProveedorPro.getSelectedItem().toString());
@@ -1272,6 +1272,7 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
+        cbxProveedorPro.setSelectedItem(null);
         LimpiarTable();
         ListarProductos();
         jTabbedPane1.setSelectedIndex(3);
