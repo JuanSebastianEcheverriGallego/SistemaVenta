@@ -12,8 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComboBox;
 
 public class ProductosDAO {
@@ -60,6 +60,49 @@ public class ProductosDAO {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }finally
+        {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }
+    public List ListarProductos()
+    {
+        List<Productos> Listapro = new ArrayList();
+        String sql = "SELECT * FROM productos";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                Productos pro = new Productos();
+                pro.setId(rs.getInt("id"));
+                pro.setCodigo(rs.getString("codigo"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setProveedor(rs.getString("proveedor"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                Listapro.add(pro);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Listapro;
+    }
+    public boolean EliminarProducto(int id)
+    {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
         }finally
         {
             try {
