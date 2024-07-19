@@ -46,7 +46,7 @@ public class Sistema extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         txtIdCliente.setVisible(false);
         txtIdVenta.setVisible(false);
-        txtIdpro.setVisible(false);
+        txtIdPro.setVisible(false);
         txtIdProveedor.setVisible(false);
         AutoCompleteDecorator.decorate(cbxProveedorPro);
         proDao.ConsultarProveedor(cbxProveedorPro);
@@ -363,6 +363,11 @@ public class Sistema extends javax.swing.JFrame {
                 "CÓDIGO", "DESCRIPCIÓN", "CANTIDAD", "PRECIO", "TOTAL"
             }
         ));
+        TableVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TableVentaKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableVenta);
         if (TableVenta.getColumnModel().getColumnCount() > 0) {
             TableVenta.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -1412,7 +1417,7 @@ public class Sistema extends javax.swing.JFrame {
                     txtDescripcionVenta.setText("" + pro.getNombre());
                     txtPrecioVenta.setText("" + pro.getPrecio());
                     txtStockDisponible.setText("" + pro.getStock());
-                    txtIdPro.setText(""+pro.getId());
+                    txtIdPro.setText("" + pro.getId());
                     txtCantidadVenta.requestFocus();
                 } else {
                     LimpiarVenta();
@@ -1478,12 +1483,11 @@ public class Sistema extends javax.swing.JFrame {
                 int dni = Integer.parseInt(txtRucVenta.getText());
                 cl = client.BuscarCliente(dni);
                 if (cl.getNombre() != null) {
-                    txtNombreClienteVenta.setText(""+cl.getNombre());
-                    txtTelefonoClienteVenta.setText(""+cl.getTelefono());
-                    txtDireccionClienteVenta.setText(""+cl.getDireccion());
-                    txtRazonClienteVenta.setText(""+cl.getRazon());
-                }else
-                {
+                    txtNombreClienteVenta.setText("" + cl.getNombre());
+                    txtTelefonoClienteVenta.setText("" + cl.getTelefono());
+                    txtDireccionClienteVenta.setText("" + cl.getDireccion());
+                    txtRazonClienteVenta.setText("" + cl.getRazon());
+                } else {
                     txtRucVenta.setText("");
                     JOptionPane.showMessageDialog(null, "El cliente no existe");
                 }
@@ -1500,6 +1504,10 @@ public class Sistema extends javax.swing.JFrame {
     private void txtIdProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdProActionPerformed
+
+    private void TableVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableVentaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TableVentaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -1672,10 +1680,9 @@ public class Sistema extends javax.swing.JFrame {
         txtDesPro.setText("");
         txtCantPro.setText("");
         txtPrecioPro.setText("");
-        txtIdVenta.setText("");
     }
-    private void TotalPagar()
-    {
+
+    private void TotalPagar() {
         Totalpagar = 0.00;
         int numFila = TableVenta.getRowCount();
         for (int i = 0; i < numFila; i++) {
@@ -1684,17 +1691,17 @@ public class Sistema extends javax.swing.JFrame {
         }
         LabelTotal.setText(String.format("%.2f", Totalpagar));
     }
-    private void LimpiarVenta()
-    {
+
+    private void LimpiarVenta() {
         txtCodigoVenta.setText("");
         txtDescripcionVenta.setText("");
         txtCantidadVenta.setText("");
         txtStockDisponible.setText("");
         txtPrecioVenta.setText("");
+        txtIdVenta.setText("");
     }
-    
-    private void RegistarVenta()
-    {
+
+    private void RegistarVenta() {
         String cliente = txtNombreClienteVenta.getText();
         String vendedor = lblVendedor.getText();
         double monto = Totalpagar;
@@ -1703,14 +1710,13 @@ public class Sistema extends javax.swing.JFrame {
         v.setTotal(monto);
         Vdao.RegistrarVenta(v);
     }
-    
-    private void RegistrarDetalle()
-    {   
+
+    private void RegistrarDetalle() {
         int id = Vdao.IdVenta();
         for (int i = 0; i < TableVenta.getRowCount(); i++) {
-            String cod = TableVenta.getValueAt(i,0).toString();
-            int cant = Integer.parseInt(TableVenta.getValueAt(i,2).toString());
-            double precio = Double.parseDouble(TableVenta.getValueAt(i,3).toString());
+            String cod = TableVenta.getValueAt(i, 0).toString();
+            int cant = Integer.parseInt(TableVenta.getValueAt(i, 2).toString());
+            double precio = Double.parseDouble(TableVenta.getValueAt(i, 3).toString());
             Dv.setCod_pro(cod);
             Dv.setCantidad(cant);
             Dv.setPrecio(precio);
