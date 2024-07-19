@@ -222,9 +222,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="txtStockDisponible" min="-2" pref="71" max="-2" attributes="0"/>
-                                      <EmptySpace pref="124" max="32767" attributes="0"/>
-                                      <Component id="txtIdPro" min="-2" pref="14" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtIdPro" min="-2" pref="28" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnEliminarVenta" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
@@ -246,7 +246,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtTelefonoClienteVenta" min="-2" pref="77" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtDireccionClienteVenta" pref="0" max="32767" attributes="0"/>
+                                      <Component id="txtDireccionClienteVenta" pref="63" max="32767" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtRazonClienteVenta" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -498,6 +498,9 @@
             <Component class="javax.swing.JTextField" name="txtRazonClienteVenta">
             </Component>
             <Component class="javax.swing.JTextField" name="txtIdPro">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdProActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1093,7 +1096,7 @@
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel25" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                               <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel23" alignment="0" pref="74" max="32767" attributes="0"/>
+                              <Component id="jLabel23" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel26" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                               <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>

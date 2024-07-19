@@ -148,6 +148,7 @@ public class ProductosDAO {
             ps.setString(1, cod);
             rs = ps.executeQuery();
             if (rs.next()) {
+                producto.setId(rs.getInt("id"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setStock(rs.getInt("stock"));
