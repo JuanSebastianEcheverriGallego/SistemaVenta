@@ -38,6 +38,7 @@ public class Sistema extends javax.swing.JFrame {
     VentaDAO Vdao = new VentaDAO();
     Detalle Dv = new Detalle();
     DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel tmp = new DefaultTableModel();
     int item;
     double Totalpagar = 0.00;
 
@@ -1499,6 +1500,9 @@ public class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
         RegistarVenta();
         RegistrarDetalle();
+        ActualizarStock();
+        LimpiarTableVenta();
+        LimpiarClienteVenta();
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
     private void txtIdProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProActionPerformed
@@ -1724,5 +1728,33 @@ public class Sistema extends javax.swing.JFrame {
             Vdao.RegistrarDetalle(Dv);
         }
 
+    }
+    
+    private void ActualizarStock()
+    {
+        for (int i = 0; i < TableVenta.getRowCount(); i++) {
+            String cod = TableVenta.getValueAt(i, 0).toString();
+            int cant = Integer.parseInt(TableVenta.getValueAt(i, 2).toString());
+            pro = proDao.BuscarPro(cod);
+            int StockActual = pro.getStock() - cant;
+            Vdao.ActualizarStock(StockActual, cod);
+        }
+    }
+    
+    private void LimpiarTableVenta()
+    {
+         tmp = (DefaultTableModel) TableVenta.getModel();
+         int fila = TableVenta.getRowCount();
+         for (int i = 0; i < fila; i++) {
+             tmp.removeRow(0);
+        }
+    }
+
+    private void LimpiarClienteVenta() {
+        txtRucVenta.setText("");
+        txtNombreClienteVenta.setText("");
+        txtTelefonoClienteVenta.setText("");
+        txtDireccionClienteVenta.setText("");
+        txtRazonClienteVenta.setText("");
     }
 }
