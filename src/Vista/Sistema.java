@@ -97,6 +97,7 @@ public class Sistema extends javax.swing.JFrame {
         if (priv.getRol().equals("Asistente")) {
             btnProductos.setEnabled(false);
             btnProveedor.setEnabled(false);
+            btnRegistrar.setEnabled(false);
             lblVendedor.setText(priv.getNombre());
         } else {
             lblVendedor.setText(priv.getNombre());
@@ -200,6 +201,7 @@ public class Sistema extends javax.swing.JFrame {
         btnConfig = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblVendedor = new javax.swing.JLabel();
+        btnRegistrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -362,6 +364,14 @@ public class Sistema extends javax.swing.JFrame {
 
         lblVendedor.setText("vida informatico");
 
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Clientes.png"))); // NOI18N
+        btnRegistrar.setText("Usuarios");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -377,6 +387,7 @@ public class Sistema extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblVendedor)
                 .addGap(64, 64, 64))
+            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,7 +407,9 @@ public class Sistema extends javax.swing.JFrame {
                 .addComponent(btnVentas)
                 .addGap(18, 18, 18)
                 .addComponent(btnConfig)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 600));
@@ -1054,8 +1067,7 @@ public class Sistema extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNuevoProveedor, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnEliminarProveedor, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(11, 11, 11)))
+                            .addComponent(btnEliminarProveedor, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(61, 61, 61))
         );
 
@@ -1291,8 +1303,7 @@ public class Sistema extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btnPdfVentas)
                         .addGap(18, 18, 18)
-                        .addComponent(txtIdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtIdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
         jPanel6Layout.setVerticalGroup(
@@ -2041,6 +2052,12 @@ public class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxProveedorProActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        Registro reg = new Registro();
+        reg.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2107,6 +2124,7 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnPdfVentas;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnProveedor;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVentas;
     private javax.swing.JComboBox<String> cbxProveedorPro;
     private javax.swing.JLabel jLabel1;
