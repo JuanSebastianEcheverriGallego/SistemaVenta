@@ -50,6 +50,7 @@ public class ProductosDAO {
     }
     public void ConsultarProveedor(JComboBox proveedor)
     {
+        proveedor.removeAllItems();
         String sql = "SELECT nombre FROM proveedor";
         try {
             con = cn.getConnection();

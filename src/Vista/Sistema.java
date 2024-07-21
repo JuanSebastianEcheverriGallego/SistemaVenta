@@ -1106,6 +1106,11 @@ public class Sistema extends javax.swing.JFrame {
         });
 
         cbxProveedorPro.setEditable(true);
+        cbxProveedorPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProveedorProActionPerformed(evt);
+            }
+        });
 
         TableProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1567,6 +1572,7 @@ public class Sistema extends javax.swing.JFrame {
             LimpiarTable();
             ListarProveedor();
             LimpiarProveedor();
+            proDao.ConsultarProveedor(cbxProveedorPro);
         } else {
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
@@ -1600,6 +1606,7 @@ public class Sistema extends javax.swing.JFrame {
                 LimpiarTable();
                 ListarProveedor();
                 LimpiarProveedor();
+                proDao.ConsultarProveedor(cbxProveedorPro);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
@@ -1623,6 +1630,7 @@ public class Sistema extends javax.swing.JFrame {
                 LimpiarTable();
                 ListarProveedor();
                 LimpiarProveedor();
+                proDao.ConsultarProveedor(cbxProveedorPro);
             }
         }
     }//GEN-LAST:event_btnEditarProveedorActionPerformed
@@ -2028,6 +2036,10 @@ public class Sistema extends javax.swing.JFrame {
         String fechaReporte = new SimpleDateFormat("dd/MM/yyyy").format(MiDate.getDate());
         Grafico.Graficar(fechaReporte);
     }//GEN-LAST:event_btnGraficarActionPerformed
+
+    private void cbxProveedorProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProveedorProActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProveedorProActionPerformed
 
     /**
      * @param args the command line arguments
