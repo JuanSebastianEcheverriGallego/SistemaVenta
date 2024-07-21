@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -105,6 +107,28 @@ public class VentaDAO {
                 System.out.println(ex.toString());
             }
         }
+    }
+    
+    public List ListarVentas()
+    {
+        List<Venta> ListaVenta = new ArrayList();
+        String sql = "SELECT * FROM ventas";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setId(rs.getInt("id"));
+                vent.setCliente(rs.getString("cliente"));
+                vent.setVendedor(rs.getString("vendedor"));
+                vent.setTotal(rs.getDouble("total"));
+                ListaVenta.add(vent);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return ListaVenta;
     }
 
 }

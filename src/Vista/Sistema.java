@@ -37,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -133,6 +135,20 @@ public class Sistema extends javax.swing.JFrame {
             modelo.addRow(ob);
         }
         TableProducto.setModel(modelo);
+    }
+    
+    public void ListarVentas() {
+        List<Venta> ListarVenta = Vdao.ListarVentas();
+        modelo = (DefaultTableModel) TableVentas.getModel();
+        Object[] ob = new Object[4];
+        for (int i = 0; i < ListarVenta.size(); i++) {
+            ob[0] = ListarVenta.get(i).getId();
+            ob[1] = ListarVenta.get(i).getCliente();
+            ob[2] = ListarVenta.get(i).getVendedor();
+            ob[3] = ListarVenta.get(i).getTotal();
+            modelo.addRow(ob);
+        }
+        TableVentas.setModel(modelo);
     }
 
     public void LimpiarTable() {
@@ -1194,6 +1210,11 @@ public class Sistema extends javax.swing.JFrame {
                 "ID", "CLIENTE", "VENDEDOR", "TOTAL"
             }
         ));
+        TableVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableVentasMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(TableVentas);
         if (TableVentas.getColumnModel().getColumnCount() > 0) {
             TableVentas.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -1203,6 +1224,11 @@ public class Sistema extends javax.swing.JFrame {
         }
 
         btnPdfVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
+        btnPdfVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPdfVentasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1935,7 +1961,26 @@ public class Sistema extends javax.swing.JFrame {
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         // TODO add your handling code here:
         jTabbedPane1.setSelectedIndex(4);
+        LimpiarTable();
+        ListarVentas();
     }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void TableVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableVentasMouseClicked
+        // TODO add your handling code here:
+        int fila = TableVentas.rowAtPoint(evt.getPoint());
+        txtIdVenta.setText(TableVentas.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_TableVentasMouseClicked
+
+    private void btnPdfVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfVentasActionPerformed
+        try {
+            // TODO add your handling code here:
+            int id = Integer.parseInt(txtIdVenta.getText());
+            File file = new File("src/PDF/venta"+id+".pdf");
+            Desktop.getDesktop().open(file);
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_btnPdfVentasActionPerformed
 
     /**
      * @param args the command line arguments
